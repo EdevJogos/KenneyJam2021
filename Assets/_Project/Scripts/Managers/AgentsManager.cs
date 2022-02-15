@@ -1,4 +1,5 @@
 using UnityEngine;
+using static PoolDatabase;
 
 public class AgentsManager : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class AgentsManager : MonoBehaviour
     public void Initiate()
     {
         Player = player;
+    }
+
+    private void Start()
+    {
+        CreatePool(Prefabs.LASER, 10);
     }
 
     public void Restart()

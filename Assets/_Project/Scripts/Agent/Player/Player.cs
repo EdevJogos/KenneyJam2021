@@ -1,5 +1,6 @@
 using UnityEngine;
 using static TimerManager;
+using static PoolDatabase;
 
 public class Player : Agent
 {
@@ -45,7 +46,8 @@ public class Player : Agent
             if(_canFire)
             {
                 AudioManager.PlaySFX(SFXOccurrence.LASER_SHOOT);
-                Instantiate(laserPrefab, laserSpawnPoint.position, transform.rotation).Initialize(true, transform.right, 40f);
+                GetPooledObject<Laser>(Prefabs.LASER).Initialize(true, laserSpawnPoint.position, transform.rotation, transform.right, 40f);
+                //Instantiate(laserPrefab, laserSpawnPoint.position, transform.rotation).Initialize(true, transform.right, 40f);
                 _canFireTimer.Run();
                 _canFire = false;
             }

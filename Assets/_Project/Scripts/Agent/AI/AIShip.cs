@@ -69,7 +69,7 @@ public class AIShip : MonoBehaviour
         {
             Laser __laser = InstantiatePrefab<Laser>(Prefabs.LASER, 0, laserSpawnPoint.position, transform.rotation);
             AudioManager.PlaySFX(SFXOccurrence.LASER_SHOOT, 0, 1.2f, HelpExtensions.GetStereoPan(transform.position.x));
-            __laser.Initialize(false, transform.right, 15f);
+            __laser.Initialize(false, laserSpawnPoint.position, transform.rotation, transform.right, 15f);
             __laser.ChangeColor(colorID);
 
             _canFire = false;

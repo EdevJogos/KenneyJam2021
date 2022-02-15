@@ -78,3 +78,8 @@ public enum Colors
     BLUE,
     YELLOW,
 }
+
+public enum PoolObjects
+{
+    LASER,
+}

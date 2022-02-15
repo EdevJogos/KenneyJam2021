@@ -30,18 +30,15 @@ public class Laser : MonoBehaviour
     {
         if(GameCEO.State == GameState.GAME_OVER)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 
     private void Update()
     {
-        if (GameCEO.State != GameState.PLAY)
-            return;
-
         if (!CameraManager.InsideCamera(transform.position))
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
 
         if(_destroying)
@@ -50,12 +47,20 @@ public class Laser : MonoBehaviour
         }
     }
 
-    public void Initialize(bool p_player, Vector2 p_target, float p_speed)
+    public void Initialize(bool p_player, Vector2 p_position, Quaternion p_rotation, Vector2 p_target, float p_speed)
     {
         belongPlayer = p_player;
+        reflected = false;
+        spriteRenderer.color = Color.white;
+        transform.localPosition = p_position;
+        transform.rotation = p_rotation;
+        GetComponent<Animator>().Rebind();
 
         _speed = p_speed;
+        _destroying = false;
         _direction = p_target;
+
+        gameObject.SetActive(true);
         _rigidbody2D.velocity = _direction * _speed;
     }
 
@@ -70,7 +75,7 @@ public class Laser : MonoBehaviour
 
     public void DestroyLaser()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     public void RequestDestroy()
